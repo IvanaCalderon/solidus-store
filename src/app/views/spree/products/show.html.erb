@@ -42,16 +42,18 @@
 
         </div>
 
-        <%= render partial: 'taxons' %>
-
-        <h4>Articulos relacionados</h4>
+        <%# <%= render partial: 'taxons' %>
+        
+        <div class="row">
+        <h4>Artículos relacionados</h4>
+        
 
         <div data-hook="homepage_products">
           <% cache(cache_key_for_products) do %>
-            <%= render partial: 'spree/shared/products', locals: { products: @products } %>
+            <%= render partial: 'spree/shared/products', locals: { products: @products.where("id != ?", @product.id).take(3)  } %>
           <% end %>
         </div>
-
+      </div>
       </div>
     </div>
 
